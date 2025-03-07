@@ -26,13 +26,13 @@ interface FooterProps {
 
 const Footer = ({
   socialLinks = {
-    github: "https://github.com",
+    github: "https://github.com/Alikeevich",
     twitter: "https://twitter.com",
-    instagram: "https://instagram.com",
+    instagram: "https://www.instagram.com/alik_eevich/",
     linkedin: "https://linkedin.com",
-    telegram: "https://t.me",
+    telegram: "https://t.me/Aleshhhhhh",
   },
-  email = "contact@example.com",
+  email = "alikkenzheb@gmail.com",
   copyrightYear = new Date().getFullYear(),
   developerName = "AI Developer",
 }: FooterProps) => {

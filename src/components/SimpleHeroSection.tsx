@@ -52,13 +52,8 @@ const SimpleHeroSection = ({
   }, []);
 
   return (
-    <section className="relative min-h-[800px] w-full flex flex-col items-center justify-center overflow-hidden bg-[#1a0b2e] py-20 px-4">
-      {/* Animated background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-purple-700/20 to-transparent rounded-full blur-3xl animate-[pulse_15s_ease-in-out_infinite]" />
-        <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-gradient-to-tl from-fuchsia-700/20 to-transparent rounded-full blur-3xl animate-[pulse_20s_ease-in-out_infinite_2s]" />
-        <div className="absolute top-1/3 right-1/4 w-1/3 h-1/3 bg-gradient-to-bl from-pink-700/20 to-transparent rounded-full blur-3xl animate-[pulse_18s_ease-in-out_infinite_1s]" />
-      </div>
+    <section className="relative min-h-[800px] w-full flex flex-col items-center justify-center overflow-hidden py-20 px-4">
+      {/* Background handled by AnimatedBackground component */}
 
       {/* Hero content */}
       <div className="z-10 text-center max-w-4xl">

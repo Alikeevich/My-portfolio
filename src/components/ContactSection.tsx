@@ -51,9 +51,9 @@ const ContactSection = ({
   title = "Get In Touch",
   subtitle = "Have a project in mind or want to collaborate? Feel free to reach out!",
   socialLinks = {
-    github: "https://github.com",
-    instagram: "https://instagram.com",
-    telegram: "https://t.me/username",
+    github: "https://github.com/Alikeevich",
+    instagram: "https://www.instagram.com/alik_eevich/",
+    telegram: "https://t.me/Aleshhhhhh",
   },
 }: ContactSectionProps) => {
   const [formState, setFormState] = useState({
@@ -71,19 +71,36 @@ const ContactSection = ({
     setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormState({ name: "", email: "", message: "" });
+    try {
+      // Send data to our API endpoint
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formState),
+      });
 
-      // Reset success message after 5 seconds
-      setTimeout(() => setIsSubmitted(false), 5000);
-    }, 1500);
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormState({ name: "", email: "", message: "" });
+
+        // Reset success message after 5 seconds
+        setTimeout(() => setIsSubmitted(false), 5000);
+      } else {
+        const data = await response.json();
+        alert(data.error || "Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      alert("An error occurred. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

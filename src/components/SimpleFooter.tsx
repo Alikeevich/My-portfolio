@@ -29,11 +29,11 @@ const SimpleFooter = ({
   socialLinks = {
     github: "https://github.com/Alikeevich",
     twitter: "https://twitter.com",
-    instagram: "https://instagram.com",
+    instagram: "https://www.instagram.com/alik_eevich/",
     linkedin: "https://linkedin.com",
-    telegram: "https://t.me",
+    telegram: "https://t.me/Aleshhhhhh",
   },
-  email = "contact@example.com",
+  email = "alikkenzheb@gmail.com",
   copyrightYear = new Date().getFullYear(),
   developerName = "Alikeevich",
 }: FooterProps) => {
@@ -66,16 +66,10 @@ const SimpleFooter = ({
     return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
-  const socialIcons = [
-    { icon: Github, link: socialLinks.github, label: "GitHub" },
-    { icon: Twitter, link: socialLinks.twitter, label: "Twitter" },
-    { icon: Instagram, link: socialLinks.instagram, label: "Instagram" },
-    { icon: Linkedin, link: socialLinks.linkedin, label: "LinkedIn" },
-    { icon: Mail, link: `mailto:${email}`, label: "Email" },
-  ];
+  const socialIcons = [];
 
   return (
-    <footer className="w-full py-8 px-4 bg-[#120726] border-t border-purple-900/30">
+    <footer className="w-full py-8 px-4 border-t border-purple-900/30 relative z-10">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Logo and copyright */}
@@ -91,24 +85,7 @@ const SimpleFooter = ({
 
           {/* Social links */}
           <div className="flex gap-4">
-            {socialIcons.map((social, index) => (
-              <a
-                key={social.label}
-                href={social.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative group opacity-0 animate-[fadeIn_0.3s_ease-out_forwards]"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="p-2 rounded-full bg-purple-900/30 hover:bg-purple-800/50 transition-colors duration-300 hover:-translate-y-1 transform transition-transform">
-                  <social.icon className="w-5 h-5 text-purple-300 group-hover:text-purple-100" />
-                </div>
-                <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs text-purple-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {social.label}
-                </span>
-                <div className="absolute -inset-1 rounded-full bg-purple-500/20 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-300"></div>
-              </a>
-            ))}
+            {/* Social icons removed as requested */}
           </div>
         </div>
 

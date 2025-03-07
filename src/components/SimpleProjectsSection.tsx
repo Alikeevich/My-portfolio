@@ -40,9 +40,8 @@ const SimpleProjectsSection = ({
         "An AI-powered English tutor that helps users improve their language skills through interactive conversations and personalized lessons.",
       descriptionRU:
         "Репетитор английского языка на базе ИИ, который помогает пользователям улучшить языковые навыки через интерактивные беседы и персонализированные уроки.",
-      image:
-        "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=450&q=80",
-      category: "AI",
+      image: "/images/ANTBEAR.png",
+      category: "Bots",
       technologies: [
         { name: "Python" },
         { name: "NLP" },
@@ -60,8 +59,7 @@ const SimpleProjectsSection = ({
         "Automatic Diagnosis of Plants and Tree Diseases - an AI bot that identifies illnesses in plants through image recognition.",
       descriptionRU:
         "Автоматическая диагностика болезней растений и деревьев - ИИ-бот, который определяет болезни растений с помощью распознавания изображений.",
-      image:
-        "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=450&q=80",
+      image: "/images/ADOPTD.png",
       category: "AI",
       technologies: [
         { name: "Python" },
@@ -80,9 +78,8 @@ const SimpleProjectsSection = ({
         "An AI-powered legal assistant that provides legal advice and information specific to Kazakhstan's legal system.",
       descriptionRU:
         "Юридический помощник на базе ИИ, который предоставляет юридические консультации и информацию, специфичную для правовой системы Казахстана.",
-      image:
-        "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=450&q=80",
-      category: "AI",
+      image: "/images/LAWYER.png",
+      category: "Bots",
       technologies: [
         { name: "Python" },
         { name: "NLP" },
@@ -99,8 +96,7 @@ const SimpleProjectsSection = ({
         "A chat roulette platform designed specifically for practicing English through conversations with other learners.",
       descriptionRU:
         "Платформа чат-рулетки, разработанная специально для практики английского языка через разговоры с другими изучающими.",
-      image:
-        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=450&q=80",
+      image: "/images/AMEN.png",
       category: "Web",
       technologies: [
         { name: "Next.js" },
@@ -120,8 +116,7 @@ const SimpleProjectsSection = ({
         "An AI-powered interactive detective novella game where players solve mysteries through dialogue and investigation.",
       descriptionRU:
         "Интерактивная детективная новелла с ИИ, где игроки раскрывают тайны через диалоги и расследования.",
-      image:
-        "https://images.unsplash.com/photo-1605806616949-59175538ad92?w=450&q=80",
+      image: "/images/TBI.png",
       category: "AI",
       technologies: [
         { name: "Unity" },
@@ -184,10 +179,7 @@ const SimpleProjectsSection = ({
       : ["Все", "ИИ", "Боты", "Веб"];
 
   return (
-    <section
-      className="py-20 px-4 md:px-8 bg-[#120727] min-h-screen"
-      id="projects"
-    >
+    <section className="py-20 px-4 md:px-8 min-h-screen" id="projects">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div

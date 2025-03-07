@@ -1,10 +1,13 @@
 import dynamic from "next/dynamic";
 
 // Use simplified components without framer-motion
-const SimpleParticleBackground = dynamic(
-  () => import("@/components/SimpleParticleBackground"),
+const AnimatedBackground = dynamic(
+  () => import("@/components/AnimatedBackground"),
   { ssr: false },
 );
+const CustomCursor = dynamic(() => import("@/components/CustomCursor"), {
+  ssr: false,
+});
 const SimpleNavbar = dynamic(() => import("@/components/SimpleNavbar"), {
   ssr: false,
 });
@@ -26,8 +29,9 @@ const SimpleFooter = dynamic(() => import("@/components/SimpleFooter"), {
 
 export default function Page() {
   return (
-    <main className="relative min-h-screen bg-[#0f0418]">
-      <SimpleParticleBackground />
+    <main className="relative min-h-screen">
+      <AnimatedBackground />
+      <CustomCursor />
       <SimpleNavbar />
       <SimpleHeroSection />
       <SimpleProjectsSection />

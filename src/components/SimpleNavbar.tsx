@@ -18,7 +18,6 @@ const SimpleNavbar = ({
   menuItems = [
     { label: "Home", labelRU: "Главная", href: "#" },
     { label: "Projects", labelRU: "Проекты", href: "#projects" },
-    { label: "Skills", labelRU: "Навыки", href: "#skills" },
     { label: "Contact", labelRU: "Контакты", href: "#contact" },
   ],
   currentLanguage = "EN",
@@ -44,6 +43,8 @@ const SimpleNavbar = ({
     onLanguageChange(newLanguage);
     // Store language preference in localStorage
     localStorage.setItem("preferredLanguage", newLanguage);
+    // Refresh the page to apply changes
+    window.location.reload();
   };
 
   // Load language preference from localStorage on mount
@@ -61,7 +62,7 @@ const SimpleNavbar = ({
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#1a0b2e]",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent backdrop-blur-sm",
         isScrolled ? "shadow-lg shadow-purple-900/20 py-2" : "py-4",
       )}
     >
@@ -116,7 +117,7 @@ const SimpleNavbar = ({
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="bg-[#1a0b2e] border-purple-900/50 w-[250px] p-0"
+              className="bg-purple-900/80 backdrop-blur-md border-purple-900/50 w-[250px] p-0"
             >
               <div className="flex flex-col h-full p-6">
                 <div className="flex justify-end mb-8">
