@@ -118,6 +118,42 @@
   }
 }
 
+@keyframes nameAnimation {
+  0% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+  20% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  30% {
+    transform: translateY(-5px) rotate(2deg);
+  }
+  40% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  60% {
+    transform: scale(1) rotate(2deg);
+  }
+  70% {
+    transform: scale(1.05) rotate(-2deg);
+  }
+  80% {
+    transform: scale(1) rotate(1deg);
+  }
+  90% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }

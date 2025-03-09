@@ -74,8 +74,30 @@ const SimpleFooter = ({
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Logo and copyright */}
           <div className="flex flex-col items-center md:items-start">
-            <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 mb-2 opacity-0 animate-[fadeIn_0.5s_ease-out_forwards]">
-              {developerName}
+            <div
+              className="text-2xl font-bold text-white mb-2 opacity-0 animate-[fadeIn_0.5s_ease-out_forwards] cursor-pointer relative group"
+              onClick={() => {
+                const element = document.getElementById(
+                  "footer-name-animation",
+                );
+                if (element) {
+                  element.classList.remove(
+                    "animate-[nameAnimation_3s_ease-in-out]",
+                  );
+                  void element.offsetWidth; // Trigger reflow
+                  element.classList.add(
+                    "animate-[nameAnimation_3s_ease-in-out]",
+                  );
+                }
+              }}
+            >
+              <span
+                id="footer-name-animation"
+                className="relative inline-block"
+              >
+                {developerName}
+              </span>
+              <span className="absolute -inset-1 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 h-0.5 bottom-0 bg-gradient-to-r from-blue-500 via-yellow-400 to-blue-500 rounded-full"></span>
             </div>
             <p className="text-purple-300/70 text-sm">
               © {copyrightYear}{" "}
@@ -100,22 +122,28 @@ const SimpleFooter = ({
           </div>
 
           <div className="flex gap-4">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-purple-300/70 hover:text-purple-100 hover:bg-purple-900/50"
-            >
-              {language === "EN"
-                ? "Privacy Policy"
-                : "Политика конфиденциальности"}
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-purple-300/70 hover:text-purple-100 hover:bg-purple-900/50"
-            >
-              {language === "EN" ? "Terms of Service" : "Условия использования"}
-            </Button>
+            <a href="/privacy-policy">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-purple-300/70 hover:text-purple-100 hover:bg-purple-900/50"
+              >
+                {language === "EN"
+                  ? "Privacy Policy"
+                  : "Политика конфиденциальности"}
+              </Button>
+            </a>
+            <a href="/terms-of-service">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-purple-300/70 hover:text-purple-100 hover:bg-purple-900/50"
+              >
+                {language === "EN"
+                  ? "Terms of Service"
+                  : "Условия использования"}
+              </Button>
+            </a>
           </div>
         </div>
       </div>

@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { cn } from "@/lib/utils";
+import ScrollReveal from "./ScrollReveal";
 
 interface SocialLinkProps {
   icon: React.ReactNode;
@@ -102,32 +103,15 @@ const SimpleContactSection = ({
     e.preventDefault();
     setIsSubmitting(true);
 
-    try {
-      // Send data to our API endpoint
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formState),
-      });
-
-      if (response.ok) {
-        setIsSubmitted(true);
-        setFormState({ name: "", email: "", message: "" });
-
-        // Reset success message after 5 seconds
-        setTimeout(() => setIsSubmitted(false), 5000);
-      } else {
-        const data = await response.json();
-        alert(data.error || "Failed to send message. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error sending message:", error);
-      alert("An error occurred. Please try again later.");
-    } finally {
+    // Simulate sending (without actually sending an email)
+    setTimeout(() => {
+      setIsSubmitted(true);
+      setFormState({ name: "", email: "", message: "" });
       setIsSubmitting(false);
-    }
+
+      // Reset success message after 5 seconds
+      setTimeout(() => setIsSubmitted(false), 5000);
+    }, 1500);
   };
 
   const placeholders = {
@@ -155,95 +139,91 @@ const SimpleContactSection = ({
       id="contact"
     >
       <div className="max-w-6xl w-full mx-auto">
-        <div className="text-center mb-12 opacity-0 animate-[fadeIn_0.6s_ease-out_forwards]">
+        <ScrollReveal className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
             {language === "EN" ? title : titleRU}
           </h2>
           <p className="text-purple-200/80 text-lg max-w-2xl mx-auto">
             {language === "EN" ? subtitle : subtitleRU}
           </p>
-        </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Contact Form */}
-          <div
-            className="bg-purple-900/20 backdrop-blur-sm p-8 rounded-2xl border border-purple-500/30 shadow-xl shadow-purple-900/20 opacity-0 animate-[fadeIn_0.6s_ease-out_forwards]"
-            style={{ animationDelay: "0.2s" }}
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <MessageSquare className="w-6 h-6 text-purple-400" />
-              <h3 className="text-2xl font-semibold text-white">
-                {language === "EN" ? "Send a Message" : "Отправить сообщение"}
-              </h3>
-            </div>
-
-            {isSubmitted ? (
-              <div className="bg-purple-800/40 border border-purple-500/50 rounded-lg p-6 text-center opacity-0 animate-[fadeIn_0.5s_ease-out_forwards]">
-                <div className="w-16 h-16 bg-purple-600/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Send className="w-8 h-8 text-purple-300" />
-                </div>
-                <h4 className="text-xl font-medium text-white mb-2">
-                  {successMessage.title}
-                </h4>
-                <p className="text-purple-200/80">{successMessage.text}</p>
+          <ScrollReveal delay={0.2} direction="left">
+            <div className="bg-purple-900/20 backdrop-blur-sm p-8 rounded-2xl border border-purple-500/30 shadow-xl shadow-purple-900/20">
+              <div className="flex items-center gap-3 mb-6">
+                <MessageSquare className="w-6 h-6 text-purple-400" />
+                <h3 className="text-2xl font-semibold text-white">
+                  {language === "EN" ? "Send a Message" : "Отправить сообщение"}
+                </h3>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <Input
-                    type="text"
-                    name="name"
-                    placeholder={placeholders.name}
-                    required
-                    value={formState.name}
-                    onChange={handleChange}
-                    className="bg-purple-950/50 border-purple-700/50 text-white placeholder:text-purple-300/50 focus:border-purple-500 h-12"
-                  />
+
+              {isSubmitted ? (
+                <div className="bg-purple-800/40 border border-purple-500/50 rounded-lg p-6 text-center opacity-0 animate-[fadeIn_0.5s_ease-out_forwards]">
+                  <div className="w-16 h-16 bg-purple-600/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Send className="w-8 h-8 text-purple-300" />
+                  </div>
+                  <h4 className="text-xl font-medium text-white mb-2">
+                    {successMessage.title}
+                  </h4>
+                  <p className="text-purple-200/80">{successMessage.text}</p>
                 </div>
-                <div>
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder={placeholders.email}
-                    required
-                    value={formState.email}
-                    onChange={handleChange}
-                    className="bg-purple-950/50 border-purple-700/50 text-white placeholder:text-purple-300/50 focus:border-purple-500 h-12"
-                  />
-                </div>
-                <div>
-                  <Textarea
-                    name="message"
-                    placeholder={placeholders.message}
-                    required
-                    value={formState.message}
-                    onChange={handleChange}
-                    className="bg-purple-950/50 border-purple-700/50 text-white placeholder:text-purple-300/50 focus:border-purple-500 min-h-[120px]"
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium py-3 h-12 rounded-lg transition-all duration-300 shadow-lg shadow-purple-900/30 hover:shadow-purple-900/50"
-                >
-                  {isSubmitting ? (
-                    <div className="flex items-center justify-center gap-2">
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      <span>{buttonText.sending}</span>
-                    </div>
-                  ) : (
-                    buttonText.send
-                  )}
-                </Button>
-              </form>
-            )}
-          </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div>
+                    <Input
+                      type="text"
+                      name="name"
+                      placeholder={placeholders.name}
+                      required
+                      value={formState.name}
+                      onChange={handleChange}
+                      className="bg-purple-950/50 border-purple-700/50 text-white placeholder:text-purple-300/50 focus:border-purple-500 h-12"
+                    />
+                  </div>
+                  <div>
+                    <Input
+                      type="email"
+                      name="email"
+                      placeholder={placeholders.email}
+                      required
+                      value={formState.email}
+                      onChange={handleChange}
+                      className="bg-purple-950/50 border-purple-700/50 text-white placeholder:text-purple-300/50 focus:border-purple-500 h-12"
+                    />
+                  </div>
+                  <div>
+                    <Textarea
+                      name="message"
+                      placeholder={placeholders.message}
+                      required
+                      value={formState.message}
+                      onChange={handleChange}
+                      className="bg-purple-950/50 border-purple-700/50 text-white placeholder:text-purple-300/50 focus:border-purple-500 min-h-[120px]"
+                    />
+                  </div>
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium py-3 h-12 rounded-lg transition-all duration-300 shadow-lg shadow-purple-900/30 hover:shadow-purple-900/50"
+                  >
+                    {isSubmitting ? (
+                      <div className="flex items-center justify-center gap-2">
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <span>{buttonText.sending}</span>
+                      </div>
+                    ) : (
+                      buttonText.send
+                    )}
+                  </Button>
+                </form>
+              )}
+            </div>
+          </ScrollReveal>
 
           {/* Contact Info & Social Links */}
-          <div
-            className="space-y-10 opacity-0 animate-[fadeIn_0.6s_ease-out_forwards]"
-            style={{ animationDelay: "0.3s" }}
-          >
+          <ScrollReveal className="space-y-10" delay={0.3} direction="right">
             {/* Contact Info */}
             <div className="bg-purple-900/20 backdrop-blur-sm p-8 rounded-2xl border border-purple-500/30 shadow-xl shadow-purple-900/20">
               <h3 className="text-2xl font-semibold text-white mb-6">
@@ -306,7 +286,7 @@ const SimpleContactSection = ({
               <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-600/30 rounded-full filter blur-3xl animate-pulse"></div>
               <div className="absolute -top-10 -right-10 w-40 h-40 bg-pink-600/30 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

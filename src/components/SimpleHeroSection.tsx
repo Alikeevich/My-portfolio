@@ -63,8 +63,64 @@ const SimpleHeroSection = ({
           </span>
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-fuchsia-300">
-          {name}
+        <h1
+          className="text-5xl md:text-7xl font-bold mb-4 relative cursor-pointer group"
+          onClick={() => {
+            const element = document.getElementById("name-animation");
+            if (element) {
+              element.classList.remove(
+                "animate-[nameAnimation_3s_ease-in-out]",
+              );
+              void element.offsetWidth; // Trigger reflow
+              element.classList.add("animate-[nameAnimation_3s_ease-in-out]");
+            }
+          }}
+        >
+          <span
+            id="name-animation"
+            className="relative inline-block text-white"
+          >
+            {name}
+          </span>
+          <span className="absolute -inset-1 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 h-1 bottom-0 bg-gradient-to-r from-blue-500 via-yellow-400 to-blue-500 rounded-full"></span>
+          <style jsx>{`
+            @keyframes nameAnimation {
+              0% {
+                transform: translateY(0);
+              }
+              10% {
+                transform: translateY(-10px) rotate(5deg);
+              }
+              20% {
+                transform: translateY(0) rotate(-3deg);
+              }
+              30% {
+                transform: translateY(-5px) rotate(2deg);
+              }
+              40% {
+                transform: translateY(0) rotate(-1deg);
+              }
+              50% {
+                transform: scale(1.1);
+              }
+              60% {
+                transform: scale(1) rotate(2deg);
+              }
+              70% {
+                transform: scale(1.05) rotate(-2deg);
+              }
+              80% {
+                transform: scale(1) rotate(1deg);
+              }
+              90% {
+                transform: translateY(-3px);
+              }
+              100% {
+                transform: translateY(0);
+              }
+            }
+          `}</style>
+          <div className="absolute -inset-1 opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10 blur-xl bg-gradient-to-r from-blue-500 via-yellow-400 to-blue-500 rounded-full"></div>
         </h1>
 
         <h2 className="text-2xl md:text-3xl font-medium mb-8 text-purple-200">

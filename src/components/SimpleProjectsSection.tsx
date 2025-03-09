@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import SimpleProjectCard from "./SimpleProjectCard";
 import CategoryFilter from "./CategoryFilter";
+import ScrollReveal from "./ScrollReveal";
 
 interface Project {
   id: string;
@@ -62,7 +63,7 @@ const SimpleProjectsSection = ({
       image: "/images/ADOPTD.png",
       category: "AI",
       technologies: [
-        { name: "Python" },
+        { name: "Java" },
         { name: "TensorFlow" },
         { name: "Computer Vision" },
         { name: "React" },
@@ -119,8 +120,8 @@ const SimpleProjectsSection = ({
       image: "/images/TBI.png",
       category: "AI",
       technologies: [
-        { name: "Unity" },
-        { name: "C#" },
+        { name: "Ren'Py" },
+        { name: "Python" },
         { name: "AI Storytelling" },
         { name: "Game Design" },
       ],
@@ -160,8 +161,50 @@ const SimpleProjectsSection = ({
   }, []);
 
   useEffect(() => {
-    if (activeCategory === "All") {
+    if (activeCategory === "All" || activeCategory === "Все") {
       setFilteredProjects(projects);
+    } else if (activeCategory === "AI" || activeCategory === "ИИ") {
+      // AI category should include AI projects and some that use AI technology
+      setFilteredProjects(
+        projects.filter(
+          (project) =>
+            project.category === "AI" ||
+            project.technologies.some(
+              (tech) =>
+                tech.name === "AI" ||
+                tech.name === "OpenAI" ||
+                tech.name === "AI Storytelling" ||
+                tech.name === "NLP",
+            ),
+        ),
+      );
+    } else if (activeCategory === "Bots" || activeCategory === "Боты") {
+      // Bots category should include bot projects
+      setFilteredProjects(
+        projects.filter(
+          (project) =>
+            project.category === "Bots" ||
+            project.title.toLowerCase().includes("bot") ||
+            project.description.toLowerCase().includes("bot") ||
+            (project.descriptionRU &&
+              project.descriptionRU.toLowerCase().includes("бот")),
+        ),
+      );
+    } else if (activeCategory === "Web" || activeCategory === "Веб") {
+      // Web category should include web projects and those with web technologies
+      setFilteredProjects(
+        projects.filter(
+          (project) =>
+            project.category === "Web" ||
+            project.technologies.some(
+              (tech) =>
+                tech.name === "React" ||
+                tech.name === "Next.js" ||
+                tech.name === "Vue.js" ||
+                tech.name === "WebRTC",
+            ),
+        ),
+      );
     } else {
       setFilteredProjects(
         projects.filter((project) => project.category === activeCategory),
@@ -182,43 +225,44 @@ const SimpleProjectsSection = ({
     <section className="py-20 px-4 md:px-8 min-h-screen" id="projects">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div
-          className="text-center mb-16 opacity-0 animate-[fadeIn_0.6s_ease-out_forwards]"
-          style={{ animationDelay: "0.2s" }}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
-            {language === "EN" ? title : titleRU}
-          </h2>
-          <p className="text-lg text-purple-200/80 max-w-2xl mx-auto">
-            {language === "EN" ? subtitle : subtitleRU}
-          </p>
+        <div className="text-center mb-16">
+          <ScrollReveal>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
+              {language === "EN" ? title : titleRU}
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal delay={0.2}>
+            <p className="text-lg text-purple-200/80 max-w-2xl mx-auto">
+              {language === "EN" ? subtitle : subtitleRU}
+            </p>
+          </ScrollReveal>
         </div>
 
         {/* Category Filter */}
-        <div
-          className="mb-12 opacity-0 animate-[fadeIn_0.6s_ease-out_forwards]"
-          style={{ animationDelay: "0.4s" }}
-        >
-          <CategoryFilter
-            categories={categories}
-            activeCategory={
-              activeCategory === "All"
-                ? language === "EN"
-                  ? "All"
-                  : "Все"
-                : activeCategory
-            }
-            onCategoryChange={handleCategoryChange}
-          />
-        </div>
+        <ScrollReveal delay={0.3} distance="10px">
+          <div className="mb-12">
+            <CategoryFilter
+              categories={categories}
+              activeCategory={
+                activeCategory === "All"
+                  ? language === "EN"
+                    ? "All"
+                    : "Все"
+                  : activeCategory
+              }
+              onCategoryChange={handleCategoryChange}
+            />
+          </div>
+        </ScrollReveal>
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (
-            <div
+            <ScrollReveal
               key={project.id}
-              className="h-full opacity-0 animate-[fadeIn_0.5s_ease-out_forwards]"
-              style={{ animationDelay: `${0.2 + index * 0.1}s` }}
+              className="h-full"
+              delay={0.2 + index * 0.1}
+              direction={index % 2 === 0 ? "left" : "right"}
             >
               <SimpleProjectCard
                 title={
@@ -238,7 +282,7 @@ const SimpleProjectsSection = ({
                 liveUrl={project.liveUrl}
                 featured={project.featured}
               />
-            </div>
+            </ScrollReveal>
           ))}
         </div>
 
