@@ -46,30 +46,30 @@ const EmailSetupInstructions = () => {
               </li>
               <li>Design your email template with a subject line and body</li>
               <li>
-                Add these variables to your template (use the {{ variable }}{" "}
+                Add these variables to your template (use the {"{{ variable }}"}{" "}
                 syntax):
               </li>
               <li>
                 <code className="bg-purple-800/50 px-1 rounded">
-                  {{ from_name }}
+                  {"{{ from_name }}"}
                 </code>{" "}
                 - Sender's name
               </li>
               <li>
                 <code className="bg-purple-800/50 px-1 rounded">
-                  {{ from_email }}
+                  {"{{ from_email }}"}
                 </code>{" "}
                 - Sender's email
               </li>
               <li>
                 <code className="bg-purple-800/50 px-1 rounded">
-                  {{ message }}
+                  {"{{ message }}"}
                 </code>{" "}
                 - Message content
               </li>
               <li>
                 <code className="bg-purple-800/50 px-1 rounded">
-                  {{ to_email }}
+                  {"{{ to_email }}"}
                 </code>{" "}
                 - Your email (alikkenzheb@gmail.com)
               </li>

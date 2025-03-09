@@ -239,19 +239,19 @@ const SimpleContactSection = ({
               <div className="flex flex-wrap gap-4">
                 <SocialLink
                   icon={<Github className="w-6 h-6 text-white" />}
-                  href={socialLinks.github}
+                  href={socialLinks.github || "#"}
                   label="GitHub"
                   color="bg-purple-800 hover:bg-purple-700"
                 />
                 <SocialLink
                   icon={<Instagram className="w-6 h-6 text-white" />}
-                  href={socialLinks.instagram}
+                  href={socialLinks.instagram || "#"}
                   label="Instagram"
                   color="bg-gradient-to-br from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
                 />
                 <SocialLink
                   icon={<Send className="w-6 h-6 text-white" />}
-                  href={socialLinks.telegram}
+                  href={socialLinks.telegram || "#"}
                   label="Telegram"
                   color="bg-blue-600 hover:bg-blue-700"
                 />

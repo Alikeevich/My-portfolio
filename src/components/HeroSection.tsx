@@ -121,23 +121,19 @@ const HeroSection = ({
           <motion.div
             key={particle.id}
             className="absolute pointer-events-none"
+            initial="hidden"
+            animate={controls}
+            variants={particleVariants}
+            custom={particle.id}
             style={{
               left: particle.x,
               top: particle.y,
               width: particle.size,
               height: particle.size,
               zIndex: Math.floor(particle.depth * 10),
+              x: movement.x * particle.depth,
+              y: movement.y * particle.depth,
             }}
-            initial="hidden"
-            animate={[
-              "visible",
-              {
-                x: movement.x * particle.depth,
-                y: movement.y * particle.depth,
-              },
-            ]}
-            variants={particleVariants}
-            custom={particle.id}
           >
             <div
               className={cn(
